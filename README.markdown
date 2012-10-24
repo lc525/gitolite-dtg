@@ -1,5 +1,6 @@
 # gitolite-dtg #
 Digital Technology Group, University of Cambridge
+
 Forked from [wingrunr21/gitolite](https://github.com/wingrunr21/gitolite)
 
 This gem provides a Ruby read-only interface to the [gitolite](https://github.com/sitaramc/gitolite) git backend system 
@@ -27,7 +28,7 @@ available via the gitolite-admin repository (like SSH keys, adding/removing repo
 ### Load a gitolite-admin repo ###
 
     require 'gitolite-dtg'
-    ga_repo = Gitolite::GitoliteAdmin.new("/path/to/gitolite/repos/gitolite-admin.git")
+    ga_repo = Gitolite::Dtg::GitoliteAdmin.new("/path/to/gitolite/repos/gitolite-admin.git")
 
 This method can only be called on an existing gitolite-admin repo.
 
