@@ -5,21 +5,13 @@ require File.join(File.dirname(__FILE__), 'config', 'group')
 module Gitolite
   module Dtg
   class Config
-    attr_accessor :repos, :groups, :filename
+    attr_accessor :repos, :groups, :config_blob
 
     def initialize(config)
       @repos = {}
       @groups = {}
-      @filename = File.basename(config)
+      @config_blob = config
       process_config(config)
-    end
-
-    def self.init(filename = "gitolite.conf")
-      file = Tempfile.new(filename)
-      conf = self.new(file.path)
-      conf.filename = filename #kill suffix added by Tempfile
-      file.close(unlink_now = true)
-      conf
     end
 
     #TODO: merge repo unless overwrite = true
@@ -102,10 +94,12 @@ module Gitolite
       end
 
       def process_config(config)
+        
+        
         context = [] #will store our context for permissions or config declarations
 
         #Read each line of our config
-        File.open(config, 'r').each do |l|
+        config.data.lines.each do |l|
 
           line = cleanup_config_line(l)
           next if line.empty? #lines are empty if we killed a comment
@@ -197,9 +191,9 @@ module Gitolite
           #but for only two cases, this is more readable
           case $1
             when "repo"
-              normalize_name(args[0], Gitolite::Config::Repo)
+              normalize_name(args[0], Gitolite::Dtg::Config::Repo)
             when "group"
-              normalize_name(args[0], Gitolite::Config::Group)
+              normalize_name(args[0], Gitolite::Dtg::Config::Group)
           end
         else
           super

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    gitolite (1.1.0)
+    gitolite-dtg (0.0.1)
       gratr19 (~> 0.4.4.1)
       grit (~> 2.5.0)
       hashery (~> 1.5.0)
@@ -43,7 +43,7 @@ PLATFORMS
 
 DEPENDENCIES
   forgery (~> 0.5.0)
-  gitolite!
+  gitolite-dtg!
   rdoc (~> 3.12)
   rspec (~> 2.9.0)
   simplecov (~> 0.6.2)
