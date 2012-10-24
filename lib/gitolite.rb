@@ -1,8 +1,10 @@
 module Gitolite
-  require 'grit'
-  require 'hashery'
-  require 'gratr'
-  require 'gitolite/ssh_key'
-  require 'gitolite/config'
-  require 'gitolite/gitolite_admin'
+  module Dtg
+    require 'grit'
+    require 'hashery'
+    require 'gratr'
+    require 'gitolite-dtg/ssh_key'
+    require 'gitolite-dtg/config'
+    require 'gitolite-dtg/gitolite_admin'
+  end
 end

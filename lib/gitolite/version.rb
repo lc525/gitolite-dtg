@@ -1,3 +1,5 @@
 module Gitolite
-  VERSION = "1.1.0"
+  module Dtg
+    VERSION = "0.0.1"
+  end
 end
