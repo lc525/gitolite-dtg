@@ -3,6 +3,7 @@ require File.join(File.dirname(__FILE__), 'config', 'repo')
 require File.join(File.dirname(__FILE__), 'config', 'group')
 
 module Gitolite
+  module Dtg
   class Config
     attr_accessor :repos, :groups, :filename
 
@@ -239,5 +240,6 @@ module Gitolite
       # Raised when group dependencies cannot be suitably resolved for output
       class GroupDependencyError < RuntimeError
       end
+  end
   end
 end

@@ -1,4 +1,5 @@
 module Gitolite
+  module Dtg
   class GitoliteAdmin
     attr_accessor :gl_admin, :ssh_keys, :config
 
@@ -185,5 +186,6 @@ module Gitolite
           keys
         end
       end
+  end
   end
 end
