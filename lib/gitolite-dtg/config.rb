@@ -5,13 +5,16 @@ require File.join(File.dirname(__FILE__), 'config', 'group')
 module Gitolite
   module Dtg
   class Config
-    attr_accessor :repos, :groups, :config_blob
+    attr_accessor :repos, :groups, :config_blob, :flat_groups, :special_groups
 
     def initialize(config)
+      @special_groups = ["all","raven"]
       @repos = {}
       @groups = {}
+      @flat_groups = {}
       @config_blob = config
       process_config(config)
+      flatten_groups
     end
 
     #TODO: merge repo unless overwrite = true
@@ -172,6 +175,31 @@ module Gitolite
           end
         end
       end
+      
+      def flatten_groups
+		@groups.each_value do |group|
+			@flat_groups[group.name]=flatten_group(group)
+		end
+	  end
+	  
+	  def flatten_group(group)
+		users = []
+		group.users.each do |user|
+			if user[0,1]=='@'
+				gname = user.gsub('@', '')
+				if ((@special_groups.include? gname) == false)
+					grp = @groups[gname]
+					gusr = flatten_group(grp)
+					if gusr != nil
+						users.concat(gusr)
+					end
+				end
+			else
+				users.push(user)
+			end
+		end
+		return users
+	  end
 
       # Normalizes the various different input objects to Strings
       def normalize_name(context, constant = nil)
