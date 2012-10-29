@@ -37,6 +37,10 @@ module Gitolite
       name = normalize_repo_name(repo)
       @repos[name]
     end
+    
+    def get_repos(pattern)
+      repos.keys.select {|k| k.include? pattern}
+    end
 
     def add_group(group, overwrite = false)
       raise ArgumentError, "Group must be of type Gitolite::Config::Group!" unless group.instance_of? Gitolite::Config::Group
